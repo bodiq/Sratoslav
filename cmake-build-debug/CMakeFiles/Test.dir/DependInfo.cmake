@@ -6,10 +6,19 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/bodya/Downloads/Test/main.cpp" "/Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/Test.dir/main.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "Clang")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "HAVE_CURL"
+  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/usr/local/include"
+  "/usr/X11R6/include"
+  "/opt/local/libexec/openssl3/include"
+  "/opt/local/include"
   )
 
 # Targets to which this target links.

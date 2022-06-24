@@ -1,10 +1,5 @@
-#include <csignal>
-#include <cstdio>
-#include <cstdlib>
-#include <exception>
 #include <string>
 #include "CImg.h"
-#include <chrono>
 #include <iostream>
 
 /*#include <tgbot/tgbot.h>*/
@@ -15,10 +10,8 @@ using namespace cimg_library;
 using namespace std;
 
 
-void draw_text(const char *filename, const char *text)
+void draw_text(CImg< unsigned char > &image, const char *text)
 {
-    CImg<unsigned char> image (filename);
-
     static int tile_size = image.width();
     static int row_col_count = image.height();
 
@@ -31,27 +24,12 @@ void draw_text(const char *filename, const char *text)
     unsigned char blue[] = { 0,0,255 };
 
     image.draw_text((row_col_count / 2) - 50, 450, text, black, 1, 1, 25);
-    image.save_jpeg("example1.jpg");
+    image.save_jpeg("/Users/bodya/Downloads/Test/images/ex1.png");
 }
 
 int main()
 {
-    char *filename = new char[12];
-    std::strcpy(filename, "example.jpg");
-
-    int len = strlen(filename);
-
-    char *filename1 = new char[len + 2];
-
-    std::strcpy(filename1, filename);
-    std::strcpy(filename1 + (len - 5), "1");
-
-    draw_text(filename, "Привіт");
-
-    char arr[] = "Привіт";
-    std::cout << arr << std::endl;
-
-    delete []filename1;
-    delete []filename;
+    CImg< unsigned char > image = CImg< unsigned char >("/Users/bodya/Downloads/Test/images/ex.png");
+    draw_text(image, "Hello");
     return 0;
 }

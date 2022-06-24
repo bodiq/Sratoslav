@@ -99,6 +99,13 @@ Test_EXTERNAL_OBJECTS =
 
 Test: CMakeFiles/Test.dir/main.cpp.o
 Test: CMakeFiles/Test.dir/build.make
+Test: /usr/local/lib/libTgBot.a
+Test: /opt/local/libexec/openssl3/lib/libssl.dylib
+Test: /opt/local/libexec/openssl3/lib/libcrypto.dylib
+Test: /opt/local/lib/libboost_system-mt.dylib
+Test: /opt/local/lib/libcurl.dylib
+Test: /usr/local/lib/libX11.dylib
+Test: /usr/local/lib/libXext.dylib
 Test: CMakeFiles/Test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Test.dir/link.txt --verbose=$(VERBOSE)

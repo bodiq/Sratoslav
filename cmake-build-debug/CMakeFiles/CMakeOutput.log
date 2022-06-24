@@ -284,3 +284,107 @@ Parsed CXX implicit link information from above output:
   implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks]
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_21e92/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_21e92.dir/build.make CMakeFiles/cmTC_21e92.dir/build
+Building C object CMakeFiles/cmTC_21e92.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_21e92.dir/CheckIncludeFile.c.o   -c /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_21e92
+"/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_21e92.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_21e92.dir/CheckIncludeFile.c.o  -o cmTC_21e92 
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD succeeded with the following output:
+Change Dir: /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_25c84/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_25c84.dir/build.make CMakeFiles/cmTC_25c84.dir/build
+Building C object CMakeFiles/cmTC_25c84.dir/src.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_25c84.dir/src.c.o   -c /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_25c84
+"/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_25c84.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_25c84.dir/src.c.o  -o cmTC_25c84 
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function XOpenDisplay exists in the /usr/local/lib/libX11.dylib;/usr/local/lib/libXext.dylib passed with the following output:
+Change Dir: /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_aebcc/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_aebcc.dir/build.make CMakeFiles/cmTC_aebcc.dir/build
+Building C object CMakeFiles/cmTC_aebcc.dir/CheckFunctionExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_aebcc.dir/CheckFunctionExists.c.o   -c "/Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_aebcc
+"/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_aebcc.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=XOpenDisplay -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_aebcc.dir/CheckFunctionExists.c.o  -o cmTC_aebcc   -L/usr/local/lib  -Wl,-rpath,/usr/local/lib /usr/local/lib/libX11.dylib /usr/local/lib/libXext.dylib 
+
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0a311/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0a311.dir/build.make CMakeFiles/cmTC_0a311.dir/build
+Building C object CMakeFiles/cmTC_0a311.dir/CheckFunctionExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_0a311.dir/CheckFunctionExists.c.o   -c "/Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_0a311
+"/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_0a311.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=gethostbyname -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_0a311.dir/CheckFunctionExists.c.o  -o cmTC_0a311 
+
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fdde8/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_fdde8.dir/build.make CMakeFiles/cmTC_fdde8.dir/build
+Building C object CMakeFiles/cmTC_fdde8.dir/CheckFunctionExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_fdde8.dir/CheckFunctionExists.c.o   -c "/Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_fdde8
+"/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_fdde8.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=connect -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_fdde8.dir/CheckFunctionExists.c.o  -o cmTC_fdde8 
+
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_14f33/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_14f33.dir/build.make CMakeFiles/cmTC_14f33.dir/build
+Building C object CMakeFiles/cmTC_14f33.dir/CheckFunctionExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_14f33.dir/CheckFunctionExists.c.o   -c "/Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_14f33
+"/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_14f33.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=remove -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_14f33.dir/CheckFunctionExists.c.o  -o cmTC_14f33 
+
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e7a02/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_e7a02.dir/build.make CMakeFiles/cmTC_e7a02.dir/build
+Building C object CMakeFiles/cmTC_e7a02.dir/CheckFunctionExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_e7a02.dir/CheckFunctionExists.c.o   -c "/Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckFunctionExists.c"
+Linking C executable cmTC_e7a02
+"/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E cmake_link_script CMakeFiles/cmTC_e7a02.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=shmat -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_e7a02.dir/CheckFunctionExists.c.o  -o cmTC_e7a02 
+
+
+

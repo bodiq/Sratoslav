@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /Users/bodya/Downloads/Test/cmake-build-debug
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/Test.dir/all
+all: CMakeFiles/Stratoslav.dir/all
 
 .PHONY : all
 
@@ -83,36 +83,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/Test.dir/clean
+clean: CMakeFiles/Stratoslav.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/Test.dir
+# Target rules for target CMakeFiles/Stratoslav.dir
 
 # All Build rule for target.
-CMakeFiles/Test.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target Test"
-.PHONY : CMakeFiles/Test.dir/all
+CMakeFiles/Stratoslav.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target Stratoslav"
+.PHONY : CMakeFiles/Stratoslav.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Test.dir/rule: cmake_check_build_system
+CMakeFiles/Stratoslav.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Test.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Stratoslav.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/Test.dir/rule
+.PHONY : CMakeFiles/Stratoslav.dir/rule
 
 # Convenience name for target.
-Test: CMakeFiles/Test.dir/rule
+Stratoslav: CMakeFiles/Stratoslav.dir/rule
 
-.PHONY : Test
+.PHONY : Stratoslav
 
 # clean rule for target.
-CMakeFiles/Test.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/clean
-.PHONY : CMakeFiles/Test.dir/clean
+CMakeFiles/Stratoslav.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/clean
+.PHONY : CMakeFiles/Stratoslav.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

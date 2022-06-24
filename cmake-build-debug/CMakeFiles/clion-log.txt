@@ -1,18 +1,13 @@
 "/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/bodya/Downloads/Test
--- The C compiler identification is AppleClang 11.0.0.11000033
--- The CXX compiler identification is AppleClang 11.0.0.11000033
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - works
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Detecting C compile features
--- Detecting C compile features - done
--- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++
--- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - works
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Detecting CXX compile features
--- Detecting CXX compile features - done
+CMake Warning at /Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindBoost.cmake:1183 (message):
+  New Boost version may have incorrect or missing dependencies and imported
+  targets
+Call Stack (most recent call first):
+  /Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindBoost.cmake:1307 (_Boost_COMPONENT_DEPENDENCIES)
+  /Applications/CLion 2.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindBoost.cmake:1908 (_Boost_MISSING_DEPENDENCIES)
+  CMakeLists.txt:9 (find_package)
+
+
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /Users/bodya/Downloads/Test/cmake-build-debug
