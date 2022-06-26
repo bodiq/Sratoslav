@@ -14,8 +14,8 @@ using namespace std;
 
 void draw_text(CImg< unsigned char > &image, const char *text)
 {
-    static int tile_size = image.width();
-    static int row_col_count = image.height();
+    int tile_size = image.width();
+    int row_col_count = image.height();
 
     unsigned char cyan[] = { 0, 255, 255 };
     unsigned char black[] = { 0, 0, 0 };
@@ -25,11 +25,11 @@ void draw_text(CImg< unsigned char > &image, const char *text)
     unsigned char orange[] = { 255, 165, 0 };
     unsigned char blue[] = { 0,0,255 };
 
-    image.draw_text((row_col_count / 2) - 50, 450, text, black, 1, 1, 25);
+    /*image.draw_text((row_col_count / 2) - 50, 450, text, black, 1, 1, 25);*/
+    image.draw_text((tile_size / 2) - (tile_size / 100 * 10), (row_col_count / 2) + (row_col_count / 100 * 40), text, black, 1, 1, 30);
     image.save_jpeg("/Users/bodya/Downloads/Test/images/ex1.jpg");
 }
 
-std::vector<string> bot_commands = {"start", "test"};
 
 int main()
 {
