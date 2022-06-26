@@ -2,6 +2,7 @@
 #include "CImg.h"
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #include <tgbot/tgbot.h>
 
@@ -25,7 +26,7 @@ void draw_text(CImg< unsigned char > &image, const char *text)
     unsigned char blue[] = { 0,0,255 };
 
     image.draw_text((row_col_count / 2) - 50, 450, text, black, 1, 1, 25);
-    image.save_jpeg("/Users/bodya/Downloads/Test/images/ex1.png");
+    image.save_jpeg("/Users/bodya/Downloads/Test/images/ex1.jpg");
 }
 
 std::vector<string> bot_commands = {"start", "test"};
@@ -35,56 +36,47 @@ int main()
     TgBot::Bot bot("5415417859:AAEI59uufbkUzTjWIUi5qLHB-uOKQ42UX-0");
 
 
-    const std::string photoFilePath = "/Users/bodya/Downloads/Test/images/ex1.png";
-    const std::string photoMimeType = "image/png";
+    const std::string photoFilePath = "/Users/bodya/Downloads/Test/images/ex1.jpg";
+    const std::string photoMimeType = "image/jpg";
 
     bool test_text_state = false;
     bool photo_check = false;
     bool photo_upload = false;
     std::string text;
 
-    bot.getEvents().onCommand("start", [&bot](Message::Ptr message)
-    {
-        bot.getApi().sendMessage(message->chat->id, "Hi!");
-    });
     bot.getEvents().onCommand("Photo", [&](Message::Ptr message)
     {
-        bot.getApi().sendMessage(message->chat->id, "Enter text");
-    });
-    bot.getEvents().onCommand("test", [&](Message::Ptr message)
-    {
-        bot.getApi().sendMessage(message->chat->id, "Enter text");
-        test_text_state = true;
+        bot.getApi().sendMessage(message->chat->id, "Send me a text: ");
+        photo_upload = true;
     });
 
     bot.getEvents().onAnyMessage([&](TgBot::Message::Ptr message)
     {
-        if (test_text_state)
+        if(photo_upload)
         {
-            text = message->text.c_str();
-            std::cout << text << std::endl;
-            test_text_state = false;
+            text = message->text;
             photo_check = true;
+            photo_upload = false;
+            bot.getApi().sendMessage(message->chat->id, "Send me a photo: ");
         }
         if(photo_check)
         {
-            bot.getApi().sendMessage(message->chat->id, "Send Photo");
-            photo_upload = true;
-            photo_check = false;
-        }
-        if(photo_upload)
-        {
-            sleep(6);
-            std::cout << "First" << std::endl;
-            std::string info = bot.getApi().getFile(message->chat->photo->bigFileId)->filePath;
-            std::cout << "First" << std::endl;
-            std::string download = bot.getApi().downloadFile(info);
-
-            std::cout << download << std::endl;
-            CImg< unsigned char > image = CImg< unsigned char >(download.c_str());
-            draw_text(image, text.c_str());
-
-            bot.getApi().sendPhoto(message->chat->id, InputFile::fromFile(photoFilePath, photoMimeType));
+            if(!message->photo.empty())
+            {
+                std::string Photo_id = message->photo[2]->fileId;
+                std::string toDownn = bot.getApi().getFile(Photo_id)->filePath;
+                std::string a = bot.getApi().downloadFile(toDownn);
+                ofstream myfile;
+                myfile.open("/Users/bodya/Downloads/Test/images/ex.jpg");
+                myfile << a;
+                CImg< unsigned char > image = CImg< unsigned char >("/Users/bodya/Downloads/Test/images/ex.jpg");
+                draw_text(image, text.c_str());
+                bot.getApi().sendPhoto(message->chat->id, InputFile::fromFile(photoFilePath, photoMimeType));
+                myfile.close();
+                photo_check = false;
+                std::remove("/Users/bodya/Downloads/Test/images/ex.jpg");
+                std::remove("/Users/bodya/Downloads/Test/images/ex1.jpg");
+            }
         }
     });
     /*bot.getEvents().onCommand("photo", [&bot, &photoFilePath, &photoMimeType](Message::Ptr message)
