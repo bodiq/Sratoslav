@@ -2,26 +2,37 @@
 
 int main()
 {
-    TgBot::Bot bot("5415417859:AAEI59uufbkUzTjWIUi5qLHB-uOKQ42UX-0");
+    srand(time(NULL));
 
+    TgBot::Bot bot("5415417859:AAEI59uufbkUzTjWIUi5qLHB-uOKQ42UX-0");
 
     const std::string photoFilePath = "/Users/bodya/Downloads/Test/images/ex1.jpg";
     const std::string photoMimeType = "image/jpg";
 
+    const std::vector<std::string> texts = {"What a guy!", "Persik a ne hlop", "Dont look at me like a stupid", "You are mad(;"};
+
     bool photo_check = false;
     bool text_check = false;
     bool color_check = false;
+    bool photo_only_check = false;
 
     std::string text;
     std::string color;
 
     bot.getEvents().onCommand("Start", [&](TgBot::Message::Ptr message)
     {
-        bot.getApi().sendMessage(message->chat->id, "Hi");
+        const std::string username = message->chat->username.c_str();
+        bot.getApi().sendMessage(message->chat->id, "Hi, " + username + "\nChoose what you want to do: [/PhotoOnly; /PhotoAndText]" );
     });
-    bot.getEvents().onCommand("Photo", [&](TgBot::Message::Ptr message)
+    bot.getEvents().onCommand("PhotoOnly", [&](TgBot::Message::Ptr message)
     {
-        bot.getApi().sendMessage(message->chat->id, "Send me a text: ");
+        bot.getApi().sendMessage(message->chat->id, "What color do you want? [black, blue, cyan, yellow, red, orange, green]");
+        color_check = true;
+        photo_only_check = true;
+    });
+    bot.getEvents().onCommand("PhotoAndText", [&](TgBot::Message::Ptr message)
+    {
+        bot.getApi().sendMessage(message->chat->id, "Enter your text: ");
         text_check = true;
     });
     bot.getEvents().onCommand("Quit", [&](TgBot::Message::Ptr message)
@@ -32,7 +43,7 @@ int main()
     {
         if(text_check)
         {
-            if(!message->text.empty() && message->text != "/Photo")
+            if(!message->text.empty() && message->text != "/PhotoAndText")
             {
                 text = message->text;
                 text_check = false;
@@ -50,6 +61,7 @@ int main()
             || message->text == "cyan" || message->text == "red" || message->text == "orange" || message->text == "green")
             {
                 color = message->text;
+                std::cout << color << std::endl;
                 photo_check = true;
                 bot.getApi().sendMessage(message->chat->id, "Send me a Photo: ");
                 color_check = false;
@@ -70,7 +82,15 @@ int main()
                 myfile.open("/Users/bodya/Downloads/Test/images/ex.jpg");
                 myfile << a;
                 cimg_library::CImg< unsigned char > image = cimg_library::CImg< unsigned char >("/Users/bodya/Downloads/Test/images/ex.jpg");
-                draw_text(image, text, color);
+                if(photo_only_check)
+                {
+                    draw_text(image, texts[getRandomNumber(0, texts.size())], color);
+                    photo_only_check = false;
+                }
+                else
+                {
+                    draw_text(image, text, color);
+                }
                 bot.getApi().sendPhoto(message->chat->id, TgBot::InputFile::fromFile(photoFilePath, photoMimeType));
                 myfile.close();
                 photo_check = false;
