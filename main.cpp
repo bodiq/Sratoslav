@@ -9,23 +9,55 @@ int main()
     const std::string photoMimeType = "image/jpg";
 
     bool photo_check = false;
-    bool photo_upload = false;
-    std::string text;
+    bool text_check = false;
+    bool color_check = false;
 
+    std::string text;
+    std::string color;
+
+    bot.getEvents().onCommand("Start", [&](TgBot::Message::Ptr message)
+    {
+        bot.getApi().sendMessage(message->chat->id, "Hi");
+    });
     bot.getEvents().onCommand("Photo", [&](TgBot::Message::Ptr message)
     {
         bot.getApi().sendMessage(message->chat->id, "Send me a text: ");
-        photo_upload = true;
+        text_check = true;
     });
-
+    bot.getEvents().onCommand("Quit", [&](TgBot::Message::Ptr message)
+    {
+        bot.getApi().sendMessage(message->chat->id, "GoodBye");
+    });
     bot.getEvents().onAnyMessage([&](TgBot::Message::Ptr message)
     {
-        if(photo_upload)
+        if(text_check)
         {
-            text = message->text;
-            photo_check = true;
-            photo_upload = false;
-            bot.getApi().sendMessage(message->chat->id, "Send me a photo: ");
+            if(!message->text.empty() && message->text != "/Photo")
+            {
+                text = message->text;
+                text_check = false;
+                color_check = true;
+                bot.getApi().sendMessage(message->chat->id, "What color do you want? [black, blue, cyan, yellow, red, orange, green]");
+            }
+            else
+            {
+                bot.getApi().sendMessage(message->chat->id, "Send me a text: ");
+            }
+        }
+        if(color_check)
+        {
+            if(message->text == "black" || message->text == "blue" || message->text == "yellow"
+            || message->text == "cyan" || message->text == "red" || message->text == "orange" || message->text == "green")
+            {
+                color = message->text;
+                photo_check = true;
+                bot.getApi().sendMessage(message->chat->id, "Send me a Photo: ");
+                color_check = false;
+            }
+            else
+            {
+                bot.getApi().sendMessage(message->chat->id, "What color do you want? [black, blue, cyan, yellow, red, orange, green]");
+            }
         }
         if(photo_check)
         {
@@ -38,12 +70,16 @@ int main()
                 myfile.open("/Users/bodya/Downloads/Test/images/ex.jpg");
                 myfile << a;
                 cimg_library::CImg< unsigned char > image = cimg_library::CImg< unsigned char >("/Users/bodya/Downloads/Test/images/ex.jpg");
-                draw_text(image, text.c_str());
+                draw_text(image, text, color);
                 bot.getApi().sendPhoto(message->chat->id, TgBot::InputFile::fromFile(photoFilePath, photoMimeType));
                 myfile.close();
                 photo_check = false;
                 std::remove("/Users/bodya/Downloads/Test/images/ex.jpg");
                 std::remove("/Users/bodya/Downloads/Test/images/ex1.jpg");
+            }
+            else if(message->photo.empty())
+            {
+                bot.getApi().sendMessage(message->chat->id, "Send me a photo: ");
             }
         }
     });
