@@ -10,6 +10,7 @@ find_package(Boost COMPONENTS system REQUIRED)
 find_package(CURL)
 find_package(X11 REQUIRED)
 
+
 include_directories(${X11_INCLUDE_DIR})
 link_directories(${X11_LIBRARIES})
 include_directories(/usr/local/include ${OPENSSL_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
