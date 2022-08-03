@@ -93,3 +93,25 @@ void ThreadPool::cancel()
         a.join();
     }
 }
+
+template <class F, class... Args>
+auto ThreadPool::Add_Job(F&& f, Args&&... args) const -> std::future<decltype(f(args...))>
+{
+    {
+        std::unique_lock<std::mutex> lock(mtx);
+        if(var_stop || var_cancel)
+        {
+            throw std::runtime_error("Adding task that is stoped or canceled! ;(>");
+        }
+    }
+
+    auto func = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+    std::shared_ptr<std::packaged_task<decltype(f(args...))>> work =
+    std::make_shared<std::packaged_task<decltype(f(args...))>>(std::move(func));
+    std::future<decltype(f(args...))> future = work->get_future();
+    tasks.emplace([work] () -> void {
+        (*work)();
+    });
+    cov.notify_all();
+    return future;
+}

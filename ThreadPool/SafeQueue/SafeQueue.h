@@ -3,6 +3,8 @@
 #include <mutex>
 #include <condition_variable>
 #include <queue>
+#include <thread>
+#include <future>
 
 template <typename T>
 class SafeQueue

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SafeQueue/SafeQueue.h"
-#include <thread>
 
 class ThreadPool
 {
@@ -20,6 +19,9 @@ public:
     bool is_running() const;
     int size() const;
 
+    template<class F, class... Args>
+    auto Add_Job(F &&f, Args&&... args) const -> std::future<decltype(f(args...))>;
+
     ~ThreadPool();
 private:
     void spawn();
@@ -30,8 +32,8 @@ private:
 
     std::vector<std::thread> staff;
     SafeQueue<std::function<void()>> tasks;
-    std::condition_variable cov;
-    std::mutex mtx;
+    mutable std::condition_variable cov;
+    mutable std::mutex mtx;
     std::once_flag once;
 };
 
