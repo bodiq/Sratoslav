@@ -68,10 +68,10 @@ RM = "/Applications/CLion 2.app/Contents/bin/cmake/mac/bin/cmake" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/bodya/Downloads/Test
+CMAKE_SOURCE_DIR = /Users/bodya/Desktop/С++/AdvancedC++/Sratoslav/Sratoslav
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/bodya/Downloads/Test/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/bodya/Desktop/С++/AdvancedC++/Sratoslav/Sratoslav/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bodya/Desktop/С++/AdvancedC++/Sratoslav/Sratoslav/cmake-build-debug/CMakeFiles /Users/bodya/Desktop/С++/AdvancedC++/Sratoslav/Sratoslav/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bodya/Downloads/Test/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bodya/Desktop/С++/AdvancedC++/Sratoslav/Sratoslav/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -143,6 +143,33 @@ Stratoslav/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/build
 .PHONY : Stratoslav/fast
 
+ThreadPool/SafeQueue.o: ThreadPool/SafeQueue.cpp.o
+
+.PHONY : ThreadPool/SafeQueue.o
+
+# target to build an object file
+ThreadPool/SafeQueue.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/SafeQueue.cpp.o
+.PHONY : ThreadPool/SafeQueue.cpp.o
+
+ThreadPool/SafeQueue.i: ThreadPool/SafeQueue.cpp.i
+
+.PHONY : ThreadPool/SafeQueue.i
+
+# target to preprocess a source file
+ThreadPool/SafeQueue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/SafeQueue.cpp.i
+.PHONY : ThreadPool/SafeQueue.cpp.i
+
+ThreadPool/SafeQueue.s: ThreadPool/SafeQueue.cpp.s
+
+.PHONY : ThreadPool/SafeQueue.s
+
+# target to generate assembly for a file
+ThreadPool/SafeQueue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/SafeQueue.cpp.s
+.PHONY : ThreadPool/SafeQueue.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -179,6 +206,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Stratoslav"
+	@echo "... ThreadPool/SafeQueue.o"
+	@echo "... ThreadPool/SafeQueue.i"
+	@echo "... ThreadPool/SafeQueue.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
