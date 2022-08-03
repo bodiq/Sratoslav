@@ -143,32 +143,32 @@ Stratoslav/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/build
 .PHONY : Stratoslav/fast
 
-ThreadPool/SafeQueue.o: ThreadPool/SafeQueue.cpp.o
+ThreadPool/ThreadPool.o: ThreadPool/ThreadPool.cpp.o
 
-.PHONY : ThreadPool/SafeQueue.o
+.PHONY : ThreadPool/ThreadPool.o
 
 # target to build an object file
-ThreadPool/SafeQueue.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/SafeQueue.cpp.o
-.PHONY : ThreadPool/SafeQueue.cpp.o
+ThreadPool/ThreadPool.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/ThreadPool.cpp.o
+.PHONY : ThreadPool/ThreadPool.cpp.o
 
-ThreadPool/SafeQueue.i: ThreadPool/SafeQueue.cpp.i
+ThreadPool/ThreadPool.i: ThreadPool/ThreadPool.cpp.i
 
-.PHONY : ThreadPool/SafeQueue.i
+.PHONY : ThreadPool/ThreadPool.i
 
 # target to preprocess a source file
-ThreadPool/SafeQueue.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/SafeQueue.cpp.i
-.PHONY : ThreadPool/SafeQueue.cpp.i
+ThreadPool/ThreadPool.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/ThreadPool.cpp.i
+.PHONY : ThreadPool/ThreadPool.cpp.i
 
-ThreadPool/SafeQueue.s: ThreadPool/SafeQueue.cpp.s
+ThreadPool/ThreadPool.s: ThreadPool/ThreadPool.cpp.s
 
-.PHONY : ThreadPool/SafeQueue.s
+.PHONY : ThreadPool/ThreadPool.s
 
 # target to generate assembly for a file
-ThreadPool/SafeQueue.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/SafeQueue.cpp.s
-.PHONY : ThreadPool/SafeQueue.cpp.s
+ThreadPool/ThreadPool.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/ThreadPool.cpp.s
+.PHONY : ThreadPool/ThreadPool.cpp.s
 
 main.o: main.cpp.o
 
@@ -206,9 +206,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Stratoslav"
-	@echo "... ThreadPool/SafeQueue.o"
-	@echo "... ThreadPool/SafeQueue.i"
-	@echo "... ThreadPool/SafeQueue.s"
+	@echo "... ThreadPool/ThreadPool.o"
+	@echo "... ThreadPool/ThreadPool.i"
+	@echo "... ThreadPool/ThreadPool.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
