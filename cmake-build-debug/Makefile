@@ -143,32 +143,32 @@ Stratoslav/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/build
 .PHONY : Stratoslav/fast
 
-ThreadPool/ThreadPool.o: ThreadPool/ThreadPool.cpp.o
+Pool/ThreadPool/ThreadPool.o: Pool/ThreadPool/ThreadPool.cpp.o
 
-.PHONY : ThreadPool/ThreadPool.o
+.PHONY : Pool/ThreadPool/ThreadPool.o
 
 # target to build an object file
-ThreadPool/ThreadPool.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/ThreadPool.cpp.o
-.PHONY : ThreadPool/ThreadPool.cpp.o
+Pool/ThreadPool/ThreadPool.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/Pool/ThreadPool/ThreadPool.cpp.o
+.PHONY : Pool/ThreadPool/ThreadPool.cpp.o
 
-ThreadPool/ThreadPool.i: ThreadPool/ThreadPool.cpp.i
+Pool/ThreadPool/ThreadPool.i: Pool/ThreadPool/ThreadPool.cpp.i
 
-.PHONY : ThreadPool/ThreadPool.i
+.PHONY : Pool/ThreadPool/ThreadPool.i
 
 # target to preprocess a source file
-ThreadPool/ThreadPool.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/ThreadPool.cpp.i
-.PHONY : ThreadPool/ThreadPool.cpp.i
+Pool/ThreadPool/ThreadPool.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/Pool/ThreadPool/ThreadPool.cpp.i
+.PHONY : Pool/ThreadPool/ThreadPool.cpp.i
 
-ThreadPool/ThreadPool.s: ThreadPool/ThreadPool.cpp.s
+Pool/ThreadPool/ThreadPool.s: Pool/ThreadPool/ThreadPool.cpp.s
 
-.PHONY : ThreadPool/ThreadPool.s
+.PHONY : Pool/ThreadPool/ThreadPool.s
 
 # target to generate assembly for a file
-ThreadPool/ThreadPool.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/ThreadPool/ThreadPool.cpp.s
-.PHONY : ThreadPool/ThreadPool.cpp.s
+Pool/ThreadPool/ThreadPool.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/Pool/ThreadPool/ThreadPool.cpp.s
+.PHONY : Pool/ThreadPool/ThreadPool.cpp.s
 
 main.o: main.cpp.o
 
@@ -206,9 +206,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Stratoslav"
-	@echo "... ThreadPool/ThreadPool.o"
-	@echo "... ThreadPool/ThreadPool.i"
-	@echo "... ThreadPool/ThreadPool.s"
+	@echo "... Pool/ThreadPool/ThreadPool.o"
+	@echo "... Pool/ThreadPool/ThreadPool.i"
+	@echo "... Pool/ThreadPool/ThreadPool.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -1,10 +1,8 @@
 #pragma once
 
-#include <mutex>
-#include <condition_variable>
 #include <queue>
-#include <thread>
-#include <future>
+#include <mutex>
+#include <atomic>
 
 template <typename T>
 class SafeQueue
@@ -16,24 +14,23 @@ public:
     SafeQueue &operator=(const SafeQueue &) = delete;
     SafeQueue &operator=(SafeQueue &&) = delete;
 
-    void push(const T &t);
+    void push(T &t);
     void push(T &&t);
     bool pop(T &ele);
     T front() const;
+
     template<typename... Args>
     void emplace(Args&& ...args)
     {
         std::unique_lock<std::mutex> lock(mtx);
         queue.emplace(std::forward<Args>(args)...);
     }
+
     void clear();
-
-
     int size() const;
     bool empty() const;
 private:
     mutable std::mutex mtx;
-    mutable std::condition_variable cov;
     std::queue<T> queue;
 };
 
@@ -47,41 +44,19 @@ void SafeQueue<T>::clear()
     }
 }
 
-
 template<typename T>
-T SafeQueue<T>::front() const
+void SafeQueue<T>::push(T &t)
 {
     std::unique_lock<std::mutex> lock(mtx);
-    cov.wait(lock, [this] () { return !queue.empty(); });
-    return queue.front();
-}
-
-template<typename T>
-void SafeQueue<T>::push(const T &t)
-{
-    std::unique_lock<std::mutex> lock(mtx);
-
-    cov.wait(lock, [this] () { return queue.size() <= std::thread::hardware_concurrency(); });
 
     queue.push(t);
-
-    lock.unlock();
-
-    cov.notify_one();
 }
 
 template<typename T>
 void SafeQueue<T>::push(T &&t)
 {
     std::unique_lock<std::mutex> lock(mtx);
-
-    cov.wait(lock, [this] () { return queue.size() <= std::thread::hardware_concurrency(); });
-
     queue.push(t);
-
-    lock.unlock();
-
-    cov.notify_one();
 }
 
 template<typename T>
@@ -96,8 +71,6 @@ bool SafeQueue<T>::pop(T &ele)
 {
     std::unique_lock<std::mutex> lock(mtx);
 
-    cov.wait(lock, [this] () { return !queue.empty(); });
-
     if(queue.empty())
     {
         return false;
@@ -106,10 +79,6 @@ bool SafeQueue<T>::pop(T &ele)
     ele = std::move(queue.front());
 
     queue.pop();
-
-    lock.unlock();
-
-    cov.notify_one();
 
     return true;
 }
@@ -120,5 +89,3 @@ bool SafeQueue<T>::empty() const
     std::unique_lock<std::mutex> lock(mtx);
     return queue.empty();
 }
-
-

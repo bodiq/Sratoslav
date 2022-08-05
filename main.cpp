@@ -1,5 +1,5 @@
 #include "TgBotImage.h"
-#include "ThreadPool/SafeQueue/SafeQueue.h"
+#include "Pool/ThreadPool/ThreadPool.h"
 
 int main()
 {
