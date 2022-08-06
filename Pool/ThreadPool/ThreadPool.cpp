@@ -39,21 +39,17 @@ void ThreadPool::setDone()
 
 void ThreadPool::addJob(std::function<void()> function)
 {
-    std::cout << "Bad" << std::endl;
     m_queues.push(function);
     cov.notify_one();
 }
 
 ThreadPool::~ThreadPool() noexcept
 {
-    std::cout << "Fuck" << std::endl;
     {
         std::unique_lock<std::mutex> lock(mtx);
         is_completed.store(true);
     }
-    std::cout << "Fuck" << std::endl;
     cov.notify_all();
-    std::cout << "Fuck" << std::endl;
     for(auto &ele : m_threads)
     {
         ele.join();
