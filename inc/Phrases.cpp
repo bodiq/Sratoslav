@@ -45,3 +45,13 @@ std::string Phrases::operator[](int index)
     }
     return phrases[index];
 }
+
+std::string Phrases::getPhrases()
+{
+    std::string all_phrases;
+    for(auto &el : phrases)
+    {
+        all_phrases = all_phrases + " " + el;
+    }
+    return all_phrases;
+}

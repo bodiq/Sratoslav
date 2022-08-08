@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(Stratoslav)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -I /bodya/X11/include -L /opt/X11/lib -lX11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -I /bodya/X11/include -L /opt/X11/lib -lX11 -lsqlite3")
 set(Boost_USE_MULTITHREADED ON)
 
 find_package(Threads REQUIRED)
@@ -19,6 +19,6 @@ if (CURL_FOUND)
     add_definitions(-DHAVE_CURL)
 endif()
 
-add_executable(Stratoslav main.cpp Pool/ThreadPool/ThreadPool.cpp Pool/Async/Async.cpp inc/Phrases.cpp)
+add_executable(Stratoslav main.cpp Pool/ThreadPool/ThreadPool.cpp Pool/Async/Async.cpp inc/Phrases.cpp DataBase/DBLite.h)
 
 target_link_libraries(Stratoslav /usr/local/lib/libTgBot.a ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${X11_LIBRARIES})

@@ -1,17 +1,24 @@
 #include "inc/TgBotImage.h"
 #include "Pool/ThreadPool/ThreadPool.h"
 #include "Pool/Async/Async.h"
-#include "inc/Phrases.h"
+#include "DataBase/DBLite.h"
 
 int main()
 {
     srand(time(nullptr));
 
-    TgBot::Bot bot("5415417859:AAEI59uufbkUzTjWIUi5qLHB-uOKQ42UX-0");
+    TgBot::Bot bot("TOKEN");
 
     ThreadPool threadPool;
     Async async;
     Phrases phrases;
+    DBLite dbLite;
+
+    int user_id = rand() % 100;
+
+    dbLite.createUserTable();
+    dbLite.createPhraseTable();
+
 
     const std::string photoFilePath = "/Users/bodya/Downloads/Test/images/ex1.jpg";
     const std::string photoMimeType = "image/jpg";
@@ -90,21 +97,20 @@ int main()
         if(!interface.load())
         {
             threadPool.addJob([&, message] () mutable
-                              {
-                                  bool state = true;
-                                  bot.getApi().sendMessage(message->chat->id, "Enter phrase you want to add");
-                                  add_phrs(bot, command, phrases, state);
-                              });
+              {
+                  bool state = true;
+                  bot.getApi().sendMessage(message->chat->id, "Enter phrase you want to add");
+                  add_phrs(bot, command, phrases, state);
+              });
         }
         else
         {
             async.addJob([&, message] () mutable
-                         {
-                             bool state = true;
-                             bot.getApi().sendMessage(message->chat->id, "Enter phrase you want to add");
-                             add_phrs(bot, command, phrases, state);
-                             state = false;
-                         });
+             {
+                 bool state = true;
+                 bot.getApi().sendMessage(message->chat->id, "Enter phrase you want to add");
+                 add_phrs(bot, command, phrases, state);
+             });
         }
     });
 
@@ -161,11 +167,12 @@ int main()
     bot.getEvents().onCommand("Start", [&](TgBot::Message::Ptr message)
     {
         threadPool.addJob([&, message] () mutable
-                          {
-                              const std::string username = message->chat->username.c_str();
-                              bot.getApi().sendMessage(message->chat->id,"Hi, " + username + "\nTo see all the available commands enter: /commands");
-                              bot.getApi().sendMessage(message->chat->id,"To change interface type: /bot-async or /bot-thread [Default: thread]");
-                          });
+          {
+              const std::string username = message->chat->username.c_str();
+              bot.getApi().sendMessage(message->chat->id,"Hi, " + username + "\nTo see all the available commands enter: /commands");
+              bot.getApi().sendMessage(message->chat->id,"To change interface type: /bot-async or /bot-thread [Default: thread]");
+              dbLite.insertData("USERS", user_id, message->chat->username);
+          });
     });
 
     bot.getEvents().onCommand("PhotoOnly", [&](TgBot::Message::Ptr message)
@@ -173,13 +180,13 @@ int main()
         if(!interface.load())
         {
             threadPool.addJob([&, message] () mutable
-                              {
-                                  bot.getApi().sendMessage(message->chat->id,"What color do you want? [black, blue, cyan, yellow, red, orange, green]");
-                                  color_check = true;
-                                  photo_only_check = true;
-                                  text_check = false;
-                                  doMagic(phrases, text, color, text_check, color_check, photo_check, photo_only_check, bot, texts, photoFilePath, photoMimeType, all_in_one);
-                              });
+              {
+                  bot.getApi().sendMessage(message->chat->id,"What color do you want? [black, blue, cyan, yellow, red, orange, green]");
+                  color_check = true;
+                  photo_only_check = true;
+                  text_check = false;
+                  doMagic(phrases, text, color, text_check, color_check, photo_check, photo_only_check, bot, texts, photoFilePath, photoMimeType, all_in_one);
+              });
         }
         else
         {
@@ -218,21 +225,26 @@ int main()
                          });
         }
     });
+
     bot.getEvents().onCommand("Quit", [&](TgBot::Message::Ptr message)
     {
         if(!interface.load())
         {
             threadPool.addJob([&, message] () mutable
-                              {
-                                  bot.getApi().sendMessage(message->chat->id, "GoodBye");
-                              });
+              {
+                  bot.getApi().sendMessage(message->chat->id, "GoodBye");
+                  dbLite.insertData("PHRASES", user_id, phrases.getPhrases());
+                  dbLite.closeDB();
+              });
         }
         else
         {
             threadPool.addJob([&, message] () mutable
-                              {
-                                  bot.getApi().sendMessage(message->chat->id, "GoodBye");
-                              });
+              {
+                  bot.getApi().sendMessage(message->chat->id, "GoodBye");
+                  dbLite.insertData("PHRASES", user_id, phrases.getPhrases());
+                  dbLite.closeDB();
+              });
         }
     });
 

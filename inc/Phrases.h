@@ -9,6 +9,7 @@ public:
     bool showAll(TgBot::Bot &bot, TgBot::Message::Ptr &message);
     void addPhrase(const std::string &to_add, TgBot::Bot &bot, TgBot::Message::Ptr &message);
     void deletePhrase(int number, TgBot::Bot &bot, TgBot::Message::Ptr &message);
+    std::string getPhrases();
 
     std::string operator[](int index);
 private:
