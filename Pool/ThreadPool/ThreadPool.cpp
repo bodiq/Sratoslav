@@ -34,7 +34,16 @@ void ThreadPool::spawnLoop()
 
 void ThreadPool::setDone()
 {
-    is_completed = true;
+    {
+        std::unique_lock<std::mutex> lock(mtx);
+        is_completed.store(true);
+    }
+    cov.notify_all();
+    for(auto &ele : m_threads)
+    {
+        ele.join();
+    }
+    m_threads.clear();
 }
 
 void ThreadPool::addJob(std::function<void()> function)

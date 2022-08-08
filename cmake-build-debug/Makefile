@@ -143,6 +143,33 @@ Stratoslav/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/build
 .PHONY : Stratoslav/fast
 
+Pool/Async/Async.o: Pool/Async/Async.cpp.o
+
+.PHONY : Pool/Async/Async.o
+
+# target to build an object file
+Pool/Async/Async.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/Pool/Async/Async.cpp.o
+.PHONY : Pool/Async/Async.cpp.o
+
+Pool/Async/Async.i: Pool/Async/Async.cpp.i
+
+.PHONY : Pool/Async/Async.i
+
+# target to preprocess a source file
+Pool/Async/Async.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/Pool/Async/Async.cpp.i
+.PHONY : Pool/Async/Async.cpp.i
+
+Pool/Async/Async.s: Pool/Async/Async.cpp.s
+
+.PHONY : Pool/Async/Async.s
+
+# target to generate assembly for a file
+Pool/Async/Async.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/Pool/Async/Async.cpp.s
+.PHONY : Pool/Async/Async.cpp.s
+
 Pool/ThreadPool/ThreadPool.o: Pool/ThreadPool/ThreadPool.cpp.o
 
 .PHONY : Pool/ThreadPool/ThreadPool.o
@@ -169,6 +196,33 @@ Pool/ThreadPool/ThreadPool.s: Pool/ThreadPool/ThreadPool.cpp.s
 Pool/ThreadPool/ThreadPool.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/Pool/ThreadPool/ThreadPool.cpp.s
 .PHONY : Pool/ThreadPool/ThreadPool.cpp.s
+
+inc/Phrases.o: inc/Phrases.cpp.o
+
+.PHONY : inc/Phrases.o
+
+# target to build an object file
+inc/Phrases.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/inc/Phrases.cpp.o
+.PHONY : inc/Phrases.cpp.o
+
+inc/Phrases.i: inc/Phrases.cpp.i
+
+.PHONY : inc/Phrases.i
+
+# target to preprocess a source file
+inc/Phrases.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/inc/Phrases.cpp.i
+.PHONY : inc/Phrases.cpp.i
+
+inc/Phrases.s: inc/Phrases.cpp.s
+
+.PHONY : inc/Phrases.s
+
+# target to generate assembly for a file
+inc/Phrases.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Stratoslav.dir/build.make CMakeFiles/Stratoslav.dir/inc/Phrases.cpp.s
+.PHONY : inc/Phrases.cpp.s
 
 main.o: main.cpp.o
 
@@ -206,9 +260,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Stratoslav"
+	@echo "... Pool/Async/Async.o"
+	@echo "... Pool/Async/Async.i"
+	@echo "... Pool/Async/Async.s"
 	@echo "... Pool/ThreadPool/ThreadPool.o"
 	@echo "... Pool/ThreadPool/ThreadPool.i"
 	@echo "... Pool/ThreadPool/ThreadPool.s"
+	@echo "... inc/Phrases.o"
+	@echo "... inc/Phrases.i"
+	@echo "... inc/Phrases.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
