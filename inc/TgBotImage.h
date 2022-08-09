@@ -121,7 +121,7 @@ const unsigned char *color(const std::string &col)
     return black;
 }
 
-void draw_text(cimg_library::CImg< unsigned char > &image, const std::string &text, const std::string &col)
+void draw_text(cimg_library::CImg< unsigned char > &image, const std::string &text, const std::string &col, std::string &save_to)
 {
     int tile_size = image.width();
     int row_col_count = image.height();
@@ -130,10 +130,10 @@ void draw_text(cimg_library::CImg< unsigned char > &image, const std::string &te
     const unsigned char *text_color = color(col);
 
     image.draw_text((tile_size / 2) - (tile_size / 100 * 10), (row_col_count / 2) + (row_col_count / 100 * 40), text.c_str(), text_color, 1, 1, 25);
-    image.save_jpeg("/Users/bodya/Downloads/Test/images/ex1.jpg");
+    image.save_jpeg(save_to.c_str());
 }
 
-void doMagic(Phrases &phr, std::string &text, std::string &color, bool &text_check, bool &color_check, bool &photo_check, bool &photo_only, TgBot::Bot &bot, const std::vector<std::string> &texts, const std::string &photoFilePath, const std::string &photoMimeType, bool &all_in_one)
+void doMagic(Phrases &phr, std::string &text, std::string &color, bool &text_check, bool &color_check, bool &photo_check, bool &photo_only, TgBot::Bot &bot, const std::vector<std::string> &texts, const std::string &photoMimeType, bool &all_in_one)
 {
     bot.getEvents().onAnyMessage([&, text_check, color_check, photo_check, photo_only, all_in_one] (TgBot::Message::Ptr message) mutable
      {
@@ -178,23 +178,25 @@ void doMagic(Phrases &phr, std::string &text, std::string &color, bool &text_che
                  std::string toDownn = bot.getApi().getFile(Photo_id)->filePath;
                  std::string a = bot.getApi().downloadFile(toDownn);
                  std::ofstream myfile;
-                 myfile.open("/Users/bodya/Downloads/Test/images/ex.jpg");
+                 std::string filePath = "/Users/bodya/Downloads/Test/images/" + message->photo[2]->fileId + ".jpg";
+                 std::string save_to = "/Users/bodya/Downloads/Test/images/" + message->photo[2]->fileId + "1.jpg";
+                 myfile.open(filePath);
                  myfile << a;
-                 cimg_library::CImg<unsigned char> image = cimg_library::CImg<unsigned char>("/Users/bodya/Downloads/Test/images/ex.jpg");
+                 cimg_library::CImg<unsigned char> image = cimg_library::CImg<unsigned char>(filePath.c_str());
                  if (photo_only)
                  {
-                     draw_text(image, texts[getRandomNumber(0, texts.size())], color);
+                     draw_text(image, texts[getRandomNumber(0, texts.size())], color, save_to);
                  }
                  else
                  {
-                     draw_text(image, text, color);
+                     draw_text(image, text, color, save_to);
                  }
-                 bot.getApi().sendPhoto(message->chat->id, TgBot::InputFile::fromFile(photoFilePath, photoMimeType));
+                 bot.getApi().sendPhoto(message->chat->id, TgBot::InputFile::fromFile(save_to, photoMimeType));
                  myfile.close();
                  photo_check = false;
                  photo_only = false;
-                 std::remove("/Users/bodya/Downloads/Test/images/ex.jpg");
-                 std::remove("/Users/bodya/Downloads/Test/images/ex1.jpg");
+                 std::remove(filePath.c_str());
+                 std::remove(save_to.c_str());
              }
          }
      });

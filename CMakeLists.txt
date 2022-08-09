@@ -19,6 +19,6 @@ if (CURL_FOUND)
     add_definitions(-DHAVE_CURL)
 endif()
 
-add_executable(Stratoslav main.cpp Pool/ThreadPool/ThreadPool.cpp Pool/Async/Async.cpp inc/Phrases.cpp DataBase/DBLite.h)
+add_executable(Stratoslav main.cpp Pool/ThreadPool/ThreadPool.cpp Pool/Async/Async.cpp inc/Phrases.cpp DataBase/DBLite.h Pool/SafeQueue/LockFree.h)
 
 target_link_libraries(Stratoslav /usr/local/lib/libTgBot.a ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${CURL_LIBRARIES} ${X11_LIBRARIES})
