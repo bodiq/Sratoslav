@@ -1,5 +1,6 @@
 #include "../ExecuteInterface/ExecuteInterface.h"
 #include "../SafeQueue/SafeQueue.h"
+#include "../SafeQueue/LockFree.h"
 
 class ThreadPool : public ExecuteInterface
 {
@@ -15,5 +16,6 @@ private:
     std::condition_variable cov;
     std::vector<std::thread> m_threads;
     SafeQueue<std::function<void()>> m_queues;
+    LockFree<std::function<void()>> m_l_queues;
 };
 

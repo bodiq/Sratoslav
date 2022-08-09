@@ -1,4 +1,5 @@
 #include "../ExecuteInterface/ExecuteInterface.h"
+#include <map>
 
 class Async : public ExecuteInterface
 {
@@ -7,5 +8,7 @@ public:
     void addJob(std::function<void()>) override;
     virtual ~Async();
 private:
-    std::vector<std::future<void>> futures;
+    std::vector<int> id_delete;
+    std::map<int, std::future<void>> mp;
+    std::mutex mtx;
 };
