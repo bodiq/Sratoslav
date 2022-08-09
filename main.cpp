@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 
     srand(time(nullptr));
 
-    TgBot::Bot bot("5415417859:AAEI59uufbkUzTjWIUi5qLHB-uOKQ42UX-0");
+    TgBot::Bot bot("TOKEN");
     Phrases phrases;
     DBLite dbLite;
 
