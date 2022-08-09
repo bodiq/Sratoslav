@@ -5,18 +5,15 @@
 
 int main(int argc, char** argv)
 {
-    ExecuteInterface *ex = new ThreadPool;
-
-    ThreadPool threadPool;
-    Async async;
+    ExecuteInterface *ex;
 
     if(std::string(argv[1]) == "async")
     {
-        ex = &async;
+        ex = new Async;
     }
     else if(std::string(argv[1]) == "thread")
     {
-        ex = &threadPool;
+        ex = new ThreadPool;
     }
 
     srand(time(nullptr));
@@ -97,7 +94,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("Start", [&](TgBot::Message::Ptr message)
     {
-        threadPool.addJob([&, message] () mutable
+        ex->addJob([&, message] () mutable
           {
               const std::string username = message->chat->username.c_str();
               bot.getApi().sendMessage(message->chat->id,"Hi, " + username + "\nTo see all the available commands enter: /commands");
