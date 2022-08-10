@@ -12,62 +12,65 @@ class LockFree
 {
 public:
 
-    void push(T &data)
+    void push(T& data)
     {
         Node *q = new Node(data);
+        Node *tmp = nullptr;
 
         bool check = false;
 
-        Node *p_Tail = nullptr;
-        Node *tmp = nullptr;
-
-        if(tail == nullptr)
+        if(tail == nullptr && tail.compare_exchange_strong(tmp, q))
         {
-            std::atomic_compare_exchange_strong(&tail, &tmp, q);
-            std::atomic_compare_exchange_strong(&head, &tmp, q);
+            count++;
+            head = q;
+            return;
         }
+
+        Node *new_tail;
+        Node *ex_tail;
 
         while(!check)
         {
-            p_Tail = tail.load();
-            check = p_Tail->n_next.compare_exchange_strong(tmp, q);
-            if(!check)
-            {
-                tail.compare_exchange_strong(p_Tail, p_Tail->n_next);
-            }
+            new_tail = tail.load();
+            ex_tail = nullptr;
+            check = new_tail->n_next.compare_exchange_strong(ex_tail, q);
         }
-        tail.compare_exchange_strong(p_Tail, q);
+
+        tail.compare_exchange_strong(new_tail, q);
         count++;
     }
 
-    bool pop(T &element)
+    bool pop(T& element)
     {
+        if(head == nullptr)
+        {
+            return false;
+        }
+
         Node *tmp = nullptr;
-        Node *p = tail.load();
+        Node *new_head = head.load();
         bool check = false;
 
-
-        while (p->n_next != nullptr)
+        if(head == tail && head.compare_exchange_strong(new_head, tmp))
         {
-            if(p->n_next == head)
-            {
-                break;
-            }
-            p = p->n_next.load();
+            element = new_head->data;
+            count--;
+
+            tail = nullptr;
+            delete tmp;
+            return true;
         }
 
         while(!check)
         {
-            tmp = head.load();
-            if(tmp == nullptr)
-            {
-                return false;
-            }
-            check = head.compare_exchange_strong(tmp, p);
+            new_head = head.load();
+            tmp = new_head->n_next;
+            check = head.compare_exchange_strong(new_head, tmp);
         }
 
         count--;
-        element = p->data;
+        element = new_head->data;
+        delete new_head;
         return true;
     }
 
@@ -81,7 +84,7 @@ private:
         std::atomic<Node*> n_next;
         T data;
 
-        Node(T &m_data) : data(m_data)
+        Node(T& m_data) : data(m_data)
         {
             n_next = nullptr;
         }
@@ -90,7 +93,7 @@ private:
             n_next = nullptr;
         }
     };
-    std::atomic<Node*> tail;
-    std::atomic<Node*> head;
-    std::atomic<int> count{0};
+    std::atomic<Node*> tail{ nullptr };
+    std::atomic<Node*> head{ nullptr };
+    std::atomic<int> count{ 0 };
 };
