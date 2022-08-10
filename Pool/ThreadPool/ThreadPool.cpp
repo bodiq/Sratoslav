@@ -25,6 +25,7 @@ void ThreadPool::spawnLoop()
 
             popped = m_l_queues.pop(currFunc);
         }
+        std::cout << "Lol" << std::endl;
         if(popped)
         {
             currFunc();
