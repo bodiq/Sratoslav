@@ -11,5 +11,5 @@
 class ExecuteInterface
 {
 public:
-    virtual void addJob(std::function<void()>) = 0;
+    virtual void addJob(int unique_id, std::function<void()>) = 0;
 };

@@ -20,10 +20,10 @@ void ThreadPool::spawnLoop()
         {
             std::unique_lock<std::mutex> lock(mtx);
             cov.wait(lock, [this] () {
-                return !m_queues.empty() || is_completed.load();
+                return !m_l_queues.empty() || is_completed.load();
             });
 
-            popped = m_queues.pop(currFunc);
+            popped = m_l_queues.pop(currFunc);
         }
         if(popped)
         {
@@ -46,9 +46,9 @@ void ThreadPool::setDone()
     m_threads.clear();
 }
 
-void ThreadPool::addJob(std::function<void()> function)
+void ThreadPool::addJob(int unique_id, std::function<void()> function)
 {
-    m_queues.push(function);
+    m_l_queues.push(function);
     cov.notify_one();
 }
 

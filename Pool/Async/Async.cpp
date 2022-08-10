@@ -1,7 +1,7 @@
 #include "Async.h"
 #include <iostream>
 
-void Async::addJob(std::function<void()> function)
+void Async::addJob(int unique_id, std::function<void()> function)
 {
     std::cout << "Kil" << std::endl;
     {
@@ -11,7 +11,6 @@ void Async::addJob(std::function<void()> function)
             mp.erase(el);
         }
     }
-    int unique_id = 0;
     /*futures.emplace_back(std::async(std::launch::async, function));*/
     std::unique_lock<std::mutex> lock(mtx);
     mp[unique_id] = std::async(std::launch::async, [function, unique_id, this] () {

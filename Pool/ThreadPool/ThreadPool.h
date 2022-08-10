@@ -6,7 +6,7 @@ class ThreadPool : public ExecuteInterface
 {
 public:
     ThreadPool();
-    void addJob(std::function<void()>) override;
+    void addJob(int unique_id, std::function<void()>) override;
     void setDone();
     virtual ~ThreadPool();
 private:

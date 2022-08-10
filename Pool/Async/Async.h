@@ -5,7 +5,7 @@ class Async : public ExecuteInterface
 {
 public:
     Async() = default;
-    void addJob(std::function<void()>) override;
+    void addJob(int unique_id, std::function<void()>) override;
     virtual ~Async();
 private:
     std::vector<int> id_delete;

@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv)
 {
-    ExecuteInterface *ex;
+    ExecuteInterface *ex = nullptr;
 
     if(std::string(argv[1]) == "async")
     {
@@ -45,8 +45,6 @@ int main(int argc, char** argv)
     bool photo_only_check = false;
     bool all_in_one = false;
 
-    std::atomic<bool> interface{false};  // false for thread true for async
-
     std::string text;
     std::string color;
 
@@ -55,7 +53,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("DeletePhrase", [&] (TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
         {
               if(phrases.showAll(bot, message))
               {
@@ -68,7 +66,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("ShowPhrase", [&] (TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
         {
             phrases.showAll(bot, message);
         });
@@ -76,7 +74,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("AddPhrase", [&] (TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
         {
               bool state = true;
               bot.getApi().sendMessage(message->chat->id, "Enter phrase you want to add");
@@ -86,7 +84,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("commands", [&] (TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
         {
             bot.getApi().sendMessage(message->chat->id, "Available commands: " + all_commands);
         });
@@ -94,7 +92,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("Start", [&](TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
           {
               const std::string username = message->chat->username.c_str();
               bot.getApi().sendMessage(message->chat->id,"Hi, " + username + "\nTo see all the available commands enter: /commands");
@@ -104,7 +102,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("PhotoOnly", [&](TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
         {
               bot.getApi().sendMessage(message->chat->id,"What color do you want? [black, blue, cyan, yellow, red, orange, green]");
               color_check = true;
@@ -116,7 +114,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("PhotoAndText", [&](TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
         {
               bot.getApi().sendMessage(message->chat->id, "Choose the phrase from list, or add by /AddPhrase");
               if(phrases.showAll(bot, message))
@@ -129,7 +127,7 @@ int main(int argc, char** argv)
 
     bot.getEvents().onCommand("Quit", [&](TgBot::Message::Ptr message)
     {
-        ex->addJob([&, message] () mutable
+        ex->addJob(user_id, [&, message] () mutable
         {
               bot.getApi().sendMessage(message->chat->id, "GoodBye");
               dbLite.insertData("PHRASES", user_id, phrases.getPhrases());
